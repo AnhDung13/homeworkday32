@@ -20,18 +20,21 @@ var products = [
     price: "4000",
   },
 ];
-var listProducts = document.querySelector("#list-products");
+
 products.forEach(function (item) {
   var tbody = document.createElement("tbody");
   var tr = document.createElement("tr");
   var productId = document.createElement("td");
-  productId.innerText = item.id;
   var productName = document.createElement("td");
-  productName.innerText = item.name;
   var price = document.createElement("td");
-  price.innerText = item.price;
   var addCart = document.createElement("td");
   var inp = document.createElement("input");
+  var listProducts = document.querySelector("#list-products");
+  var addBtn = document.createElement("button");
+  productId.innerText = item.id;
+  productName.innerText = item.name;
+  price.innerText = item.price;
+  inp.className = "quantity";
   inp.type = "number";
   inp.value = "1";
   inp.id = item.id;
@@ -41,7 +44,6 @@ products.forEach(function (item) {
     margin: "0 auto",
   };
   Object.assign(inp.style, inpCss);
-  var addBtn = document.createElement("button");
   addBtn.id = item.id;
   addBtn.className = "add-btn";
   addBtn.style.width = "100%";
@@ -62,10 +64,15 @@ var cartForm = `<table cellpadding="0" cellspacing="0" width="100%" border="1" i
         <th width="5%">Xoá</th>
     </tr>
 </thead>
-<tbody>
-    
-</tbody>
 </table><hr/>
 <button type="button" id="update_cart">Cập nhật giỏ hàng</button>
 <button type="button" id="delete_cart">Xoá giỏ hàng</button>
 `;
+var cart = document.querySelector(".cart");
+var addBtns = document.querySelectorAll(".add-btn");
+var quantitys = document.querySelectorAll(".quantity");
+addBtns.forEach(function (addBtn) {
+  addBtn.addEventListener("click", function () {
+    cart.innerHTML = cartForm;
+  });
+});
